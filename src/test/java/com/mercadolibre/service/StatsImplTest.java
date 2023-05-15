@@ -1,7 +1,6 @@
 package com.mercadolibre.service;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,10 +16,10 @@ import com.mercadolibre.repository.IAdnmeliRepository;
 public class StatsImplTest {
 	
 	@InjectMocks
-	StatsImpl service;
+	private StatsImpl service;
 	
 	@Mock
-	IAdnmeliRepository repo;
+	private IAdnmeliRepository repo;
 	
 	@BeforeEach
 	public void init() {
@@ -28,17 +27,18 @@ public class StatsImplTest {
 	}
 	
 	@Test
-	public void estadisticasTest() {
+	public void statsServiceTest() {
 		
 		int cant_adn_meli = 4;
-		int cant_adn_other = 10;
+		int cant_adn_other = 6;
 		
 		when(repo.cantidad(true)).thenReturn(cant_adn_meli);
 		when(repo.cantidad(false)).thenReturn(cant_adn_other);
 		
 		Stats result = service.estadisticas();
-		
-		assertNotNull(result);
+
+		assertEquals(result.getCount_dna_meli() , cant_adn_meli);
+
 	}
 
 }
